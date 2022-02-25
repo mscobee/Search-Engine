@@ -6,10 +6,7 @@ def main():
     # Initial URL that the crawler begins from
     initial_url = 'https://www.wikipedia.org/'
     # store the web page based on the url
-    crawler.set_page(initial_url)
-    crawler.set_soup()
-    crawler.add_hrefs_queue()
-    crawler.print_queue()
+    crawler.run_scrape(initial_url)
 
     
 

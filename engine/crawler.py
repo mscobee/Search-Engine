@@ -1,3 +1,4 @@
+from tokenize import String
 from urllib import response
 from lxml import html
 from bs4 import BeautifulSoup
@@ -33,6 +34,13 @@ class Crawler:
     
     def print_queue(self) -> None:
         print(self.href_queue)
+    def run_scrape(self, url) -> None:
+        self.set_page(url)
+        self.set_soup()
+        self.add_hrefs_queue()
+        self.print_queue()
+    def pop_queue(self) -> String:
+        return self.href_queue.pop()
 
 
 

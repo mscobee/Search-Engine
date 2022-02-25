@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "10.10.10.124",
+            "port": 3306,
+            "driver": "MariaDB",
+            "name": "searchengine",
+            "database": "search_engine",
+            "username": "root",
+            "password": "sqlpw"
+        }
+    ]
+}
