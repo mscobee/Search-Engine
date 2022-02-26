@@ -30,17 +30,15 @@ class Crawler:
         """Sets the soup variable to a BeautifulSoup object created with the current web page"""
         self.soup = BeautifulSoup(self.page.content, 'lxml')
 
-    # some of the hrefs have a schema and some do not 
-    # TODO fix the above and check if schema needs to be applied before adding to queue? Will slow down function however.
-    # because the urls that do possess scehmas are all at the end of bs4.element.Tag object could I iterate from the end and check for
-    # the schema on each url and once one an instance without one occurs the logical check can stop?
-    # TODO how to start at the end of the bs4.element.Tag?
     def add_hrefs_queue(self) -> None:
         """Adds all of the href nodes of the current web page to the queue."""
         for href in self.soup.findAll('a'):
-            print(type(href))
-            time.sleep(60)
-            url = 'https:' + href.get('href')
+            href_data = href.get('href')
+            if not href_data.startswith('http'):
+                url = 'https:' + href_data
+            else:
+                url = href_data
+
             self.href_queue.push(url)
     
     def print(self):

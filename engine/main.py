@@ -14,7 +14,7 @@ def main():
     initial_url = 'https://www.wikipedia.org/'
     execute_crawling(crawler,initial_url)
     # print(len(crawler.href_queue.get_queue()))
-
+    print(crawler.href_queue.pop())
     # execute_crawling(crawler,crawler.href_queue.pop())
     # print(len(crawler.href_queue.get_queue()))
 
