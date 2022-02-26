@@ -1,13 +1,24 @@
 from crawler import Crawler
 
+def execute_crawling(crawler, url):
+    crawler.set_page(url) 
+    crawler.set_soup()
+    crawler.add_hrefs_queue()
+    crawler.print()
+    print('NEW')
+
+
 def main():
     """Main function driver"""
     crawler = Crawler()
-    # Initial URL that the crawler begins from
     initial_url = 'https://www.wikipedia.org/'
-    # store the web page based on the url
-    crawler.run_scrape(initial_url)
+    execute_crawling(crawler,initial_url)
+    # print(len(crawler.href_queue.get_queue()))
 
+    # execute_crawling(crawler,crawler.href_queue.pop())
+    # print(len(crawler.href_queue.get_queue()))
+
+    
     
 
 if __name__ == "__main__":
