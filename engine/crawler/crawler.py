@@ -37,6 +37,9 @@ class Crawler:
         self.soup = BeautifulSoup(self.page.content, 'lxml')
 
 
+    def get_content(self):
+        return self.page.content
+
     def add_hrefs_queue(self) -> None:
         """Adds all of the href nodes of the current web page to the queue."""
         href_list = self.soup.find_all('a')

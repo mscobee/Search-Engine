@@ -14,9 +14,6 @@ class Database_Controller:
         self.cur = None
         self.index_title = None
 
-    # def set_path(self):
-    #     self.index_path = self.save_dir + '/' + self.index_title + '.html'()
-
     def connect_database(self):
         try:
             self.conn = mariadb.connect(user=self.login,
@@ -39,13 +36,3 @@ class Database_Controller:
     "INSERT INTO websites (title,content) VALUES \
         (?, ?)", (self.index_title,self.save_dir + '/' + self.index_title + '.html'))
         self.conn.commit()
-
-# Get Cursor
-# cur = conn.cursor()
-
-# title = 'Google'
-# content = 'A website search engine.'
-# cur.execute(
-#     "INSERT INTO websites (title,content) VALUES (?, ?)", 
-#     (title,content))
-# conn.commit()
