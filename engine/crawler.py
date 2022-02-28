@@ -18,6 +18,11 @@ class Crawler:
             self.page = None
             self.href_queue = My_Queue()
 
+
+    def get_queue(self) -> My_Queue:
+        return self.href_queue
+
+
     def set_page(self, url) -> None:
         """Attempts to establish a connection to the given url using requests and return the response object"""
         try:
@@ -26,22 +31,26 @@ class Crawler:
             raise SystemExit(e)
         self.page = page
     
+
     def set_soup(self) -> None:
         """Sets the soup variable to a BeautifulSoup object created with the current web page"""
         self.soup = BeautifulSoup(self.page.content, 'lxml')
 
+
     def add_hrefs_queue(self) -> None:
         """Adds all of the href nodes of the current web page to the queue."""
-        for href in self.soup.findAll('a'):
-            href_data = href.get('href')
-            if not href_data.startswith('http'):
-                url = 'https:' + href_data
-            else:
+        href_list = self.soup.find_all('a')
+        for link in href_list:
+            href_data = link.get('href')
+            if href_data is None or href_data is '':
+                continue
+            if href_data.startswith('http'):
                 url = href_data
-
+            else:
+                url = 'https:' + href_data
             self.href_queue.push(url)
-    
-    def print(self):
+
+    def print_queue(self):
         print(self.href_queue.get_queue())
   
  

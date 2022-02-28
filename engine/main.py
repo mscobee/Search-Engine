@@ -1,25 +1,21 @@
 from crawler import Crawler
 
 def execute_crawling(crawler, url):
+    print(f'Crawling URL: {url}')
     crawler.set_page(url) 
     crawler.set_soup()
     crawler.add_hrefs_queue()
-    crawler.print()
-    print('NEW')
-
+    crawler.print_queue()
 
 def main():
     """Main function driver"""
     crawler = Crawler()
-    initial_url = 'https://www.wikipedia.org/'
+    link_queue = crawler.get_queue()
+    initial_url = 'http://localhost:8080/'
+    # initial_url = 'https://www.geeksforgeeks.org/android-tutorial/'
     execute_crawling(crawler,initial_url)
-    # print(len(crawler.href_queue.get_queue()))
-    print(crawler.href_queue.pop())
-    # execute_crawling(crawler,crawler.href_queue.pop())
-    # print(len(crawler.href_queue.get_queue()))
+    execute_crawling(crawler, link_queue.pop())
 
-    
-    
 
 if __name__ == "__main__":
     main()
