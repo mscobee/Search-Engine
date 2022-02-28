@@ -1,7 +1,4 @@
-from queue import SimpleQueue
-import time
 from tokenize import String
-from urllib import response
 from lxml import html
 from bs4 import BeautifulSoup
 from my_queue import My_Queue

@@ -1,5 +1,5 @@
-from crawler.crawler import Crawler
-from indexer.indexer import Indexer
+import crawler
+import indexer
 # engine/crawler/crawler.py
 # engine/indexer/indexer.py
 def execute_crawling(crawler, url, indexer):
@@ -15,8 +15,8 @@ def execute_crawling(crawler, url, indexer):
 
 def main():
     """Main function driver"""
-    crawler = Crawler()
-    indexer = Indexer()
+    crawler = crawler.Crawler()
+    indexer = indexer.Indexer()
     link_queue = crawler.get_queue()
     initial_url = 'http://localhost:8080/'
     # initial_url = 'https://www.geeksforgeeks.org/android-tutorial/'
