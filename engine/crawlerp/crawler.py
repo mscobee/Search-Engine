@@ -18,12 +18,16 @@ class Crawler:
             self.page_title = None
             self.url = None
 
-
-    def get_page_title(self) -> str :
-        if len(self.page_title) > 50:
-            self.page_title = self.page_title[0:49]
-        return self.page_title
-
+    def crawl(self,url, indexer):
+        self.set_page(url)
+        self.set_soup()
+        self.set_page_title()
+        self.add_hrefs_queue()
+        self.print_queue()
+        indexer.set_database()
+        indexer.set_data(self.page_title)
+        indexer.insert()
+        indexer.create_file(self.get_content())
 
     def get_queue(self) -> My_Queue:
         return self.href_queue
@@ -37,16 +41,20 @@ class Crawler:
         except requests.exceptions.RequestException as e:
             raise SystemExit(e)
         self.page = page
-        
-    
+
+
+    def set_page_title(self):
+        self.page_title = BeautifulSoup(urlopen(self.url)).title.get_text()
+
 
     def set_soup(self) -> None:
         """Sets the soup variable to a BeautifulSoup object created with the current web page"""
         self.soup = BeautifulSoup(self.page.content, 'lxml')
-        self.page_title = BeautifulSoup(urlopen(self.url)).title.get_text()
+        
 
     def get_content(self):
         return self.page.content
+
 
     def add_hrefs_queue(self) -> None:
         """Adds all of the href nodes of the current web page to the queue."""
@@ -60,6 +68,7 @@ class Crawler:
             else:
                 url = 'https:' + href_data
             self.href_queue.push(url)
+
 
     def print_queue(self):
         print(self.href_queue.get_queue())
