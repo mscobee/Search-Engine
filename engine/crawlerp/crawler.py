@@ -1,7 +1,7 @@
 from tokenize import String
 from lxml import html
 from bs4 import BeautifulSoup
-from my_queue import My_Queue
+from .my_queue import My_Queue
 import requests
 class Crawler:
     

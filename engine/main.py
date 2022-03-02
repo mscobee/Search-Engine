@@ -1,7 +1,5 @@
-import crawler
-import indexer
-# engine/crawler/crawler.py
-# engine/indexer/indexer.py
+import crawlerp
+import indexerp
 def execute_crawling(crawler, url, indexer):
     print(f'Crawling URL: {url}')
     crawler.set_page(url) 
@@ -9,14 +7,14 @@ def execute_crawling(crawler, url, indexer):
     crawler.add_hrefs_queue()
     crawler.print_queue()
     indexer.set_database()
-    indexer.set_data(url) # currently set to url need to change to actual website name
+    indexer.set_data('test') # currently set to url need to change to actual website name
     indexer.insert()
     indexer.create_file(crawler.get_content())
 
 def main():
     """Main function driver"""
-    crawler = crawler.Crawler()
-    indexer = indexer.Indexer()
+    crawler = crawlerp.Crawler()
+    indexer = indexerp.Indexer()
     link_queue = crawler.get_queue()
     initial_url = 'http://localhost:8080/'
     # initial_url = 'https://www.geeksforgeeks.org/android-tutorial/'

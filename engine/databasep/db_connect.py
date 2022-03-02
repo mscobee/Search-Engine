@@ -1,14 +1,14 @@
 # Module Imports
 import mariadb
 import sys
-import db_info
-class Database_Controller:
-    def __init__(self, login, pw, host, port, db, save_directory) -> None:
-        self.login = login
-        self.pw = pw
-        self.host = host
-        self.port = port
-        self.db = db
+import databasep.db_info as dbi
+class DatabaseController:
+    def __init__(self, save_directory) -> None:
+        self.login = dbi.login
+        self.pw = dbi.pw
+        self.host = dbi.host
+        self.port = dbi.port
+        self.db = dbi.db
         self.save_dir = save_directory
         self.conn = None
         self.cur = None
