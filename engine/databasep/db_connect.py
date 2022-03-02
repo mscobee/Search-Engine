@@ -3,6 +3,8 @@ import mariadb
 import sys
 import databasep.db_info as dbi
 class DatabaseController:
+    """Database Controller is used to connect to a databased and can be used to insert data"""
+    # TODO add database removal
     def __init__(self, save_directory) -> None:
         self.login = dbi.login
         self.pw = dbi.pw

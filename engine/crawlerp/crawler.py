@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from .my_queue import My_Queue
 import requests
 class Crawler:
-    
+    """Crawler is an object that can be used to Crawl web pages and store their content using BeautifulSoup4"""
 
     def __init__(self) -> None:
             # headers required to avoid server rejection
