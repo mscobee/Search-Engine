@@ -18,9 +18,9 @@ class Indexer:
 
     def set_data(self, title):
         """Set the title of the crawled web page, the file name that is to be saved and define the path of the file."""
-        self.title = title
+        # self.title = title
         self.file_name = title + '.html'
-        self.dbc.set_title('test')
+        self.dbc.set_title(title)
         self.abs_path = os.path.join(self.dir_path, self.file_name)
 
 

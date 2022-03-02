@@ -1,4 +1,5 @@
 from tokenize import String
+from urllib.request import urlopen
 from lxml import html
 from bs4 import BeautifulSoup
 from .my_queue import My_Queue
@@ -14,6 +15,14 @@ class Crawler:
             self.soup = None
             self.page = None
             self.href_queue = My_Queue()
+            self.page_title = None
+            self.url = None
+
+
+    def get_page_title(self) -> str :
+        if len(self.page_title) > 50:
+            self.page_title = self.page_title[0:49]
+        return self.page_title
 
 
     def get_queue(self) -> My_Queue:
@@ -22,17 +31,19 @@ class Crawler:
 
     def set_page(self, url) -> None:
         """Attempts to establish a connection to the given url using requests and return the response object"""
+        self.url = url
         try:
             page = requests.get(url, headers = self.headers) # Headers needed by the crawler to avoid a server rejecting access
         except requests.exceptions.RequestException as e:
             raise SystemExit(e)
         self.page = page
+        
     
 
     def set_soup(self) -> None:
         """Sets the soup variable to a BeautifulSoup object created with the current web page"""
         self.soup = BeautifulSoup(self.page.content, 'lxml')
-
+        self.page_title = BeautifulSoup(urlopen(self.url)).title.get_text()
 
     def get_content(self):
         return self.page.content
