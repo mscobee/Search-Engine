@@ -1,9 +1,9 @@
 from tokenize import String
 from urllib.request import urlopen
-from lxml import html
 from bs4 import BeautifulSoup
 from .my_queue import My_Queue
 import requests
+from nltk.stem import *
 class Crawler:
     """Crawler is an object that can be used to Crawl web pages and store their content using BeautifulSoup4"""
 
@@ -17,6 +17,13 @@ class Crawler:
             self.href_queue = My_Queue()
             self.page_title = None
             self.url = None
+            self.page_content = None
+
+
+    def clean_html(self):
+        """Cleans the HTML text by removing stop words, stemming, etc"""
+        pass
+
 
     def crawl(self,url, indexer):
         self.set_page(url)
@@ -44,13 +51,15 @@ class Crawler:
 
 
     def set_page_title(self):
-        self.page_title = BeautifulSoup(urlopen(self.url)).title.get_text()
+        self.page_title = BeautifulSoup(urlopen(self.url), features='lxml').title.get_text()
 
 
     def set_soup(self) -> None:
         """Sets the soup variable to a BeautifulSoup object created with the current web page"""
         self.soup = BeautifulSoup(self.page.content, 'lxml')
         
+    def set_content(self):
+        self.page_content = self.soup.text
 
     def get_content(self):
         return self.page.content
