@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  db:
+    image: mariadb:latest
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+    # todo
+    environment:
+      - MYSQL_ROOT_PASSWORD = sqlpw
+      - MYSQL_PASSWORD = sqlpw
+      - MYSQL_USER=MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE = search_engine
+  
