@@ -10,6 +10,5 @@ def main():
     crawler.crawl(initial_url)
     
 
-
 if __name__ == "__main__":
     main()
