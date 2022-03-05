@@ -1,3 +1,4 @@
+import textwrap
 import databasep, os
 from pathlib import Path
 class Indexer:
@@ -34,9 +35,8 @@ class Indexer:
         website to the file."""
         self.new_file = Path(self.abs_path)
         self.new_file.touch(exist_ok=True)
-        # self.new_file = open(self.abs_path, 'wb')
         self.new_file = open(self.abs_path, 'w')
-        self.new_file.write(content)
+        self.new_file.write(textwrap.fill(content,width=75))
         self.new_file.close()
 
     

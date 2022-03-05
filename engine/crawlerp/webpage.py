@@ -46,12 +46,9 @@ class WebPage:
 
 
     def __set_content(self):
-        self.content = self.soup.get_text('|', strip=True)
-        print(self.content)
+        self.page_content = self.soup.get_text('|', strip=True)
         
-
     
     def get_content(self):
-        # return self.page.content
-        return self.content
+        return self.page_content
     
