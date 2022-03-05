@@ -1,5 +1,15 @@
-from nltk.stem import *
-from nltk.stem.porter import *
+import nltk
+from urllib.request import urlopen
 class HtmlCleaner:
+
+
     def __init__(self) -> None:
-        stemmer = PorterStemmer()
+        pass
+
+    def remove_html_tags(self, url) -> str:
+        html = urlopen(url).read()
+        return nltk.clean_html(html)
+    
+
+
+    

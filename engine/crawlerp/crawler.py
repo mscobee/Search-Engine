@@ -11,10 +11,8 @@ class Crawler:
 
 
     def crawl(self, indexer, webpage):
-        # self.set_soup()
-        # self.set_page_title()
         self.add_hrefs_queue(webpage.get_soup())
-        self.print_queue()
+        # self.print_queue()
         indexer.set_database()
         indexer.set_data(webpage.get_title())
         indexer.insert()
@@ -23,17 +21,6 @@ class Crawler:
 
     def get_queue(self) -> My_Queue:
         return self.href_queue
-
-
-    # def set_soup(self) -> None:
-    #     """Sets the soup variable to a BeautifulSoup object created with the current web page"""
-    #     self.soup = BeautifulSoup(self.page.content, 'lxml')
-        
-    # def set_content(self):
-    #     self.page_content = self.soup.text
-
-    # def get_content(self):
-    #     return self.page.content
 
 
     def add_hrefs_queue(self, soup) -> None:

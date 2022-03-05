@@ -1,3 +1,4 @@
+from imp import init_builtin
 import crawlerp
 import indexerp
 import re

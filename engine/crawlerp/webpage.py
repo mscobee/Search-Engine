@@ -15,11 +15,6 @@ class WebPage:
         self.__set_title()
         self.__set_soup()
         self.__set_content()
-        
-        print(self.page.status_code)
-        print(self.page.url)
-        print(self.title)
-        print(self.content)
 
     def __set_url(self,url):
         self.url = url
@@ -44,16 +39,19 @@ class WebPage:
     
     def __set_soup(self) -> None:
         """Sets the soup variable to a BeautifulSoup object created with the current web page"""
-        self.soup = BeautifulSoup(self.page.content, 'lxml')
+        self.soup = BeautifulSoup(self.page.content, 'html.parser')
 
     def get_soup(self) -> BeautifulSoup:
         return self.soup
 
 
     def __set_content(self):
-        self.content = self.soup.text
+        self.content = self.soup.get_text('|', strip=True)
+        print(self.content)
+        
 
     
     def get_content(self):
-        return self.page.content
+        # return self.page.content
+        return self.content
     
