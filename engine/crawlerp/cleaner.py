@@ -30,7 +30,8 @@ class HtmlCleaner:
         new_text = ''
         for word in self.content:
             new_text += (self.__ps.stem(word) + ' ')
-        self.set_data(re.split('\||\s', new_text))
+        # self.set_data(re.split('\||\s', new_text))
+        self.content = new_text
 
     def __lemmatization(self):
         new_text = ''
@@ -38,15 +39,16 @@ class HtmlCleaner:
             new_text += self.__lemm.lemmatize(word) + ' '
         self.content = new_text
 
+    def get_cleaned(self):
+        return self.content
 
-    def run_clean(self) -> str:
+    def run_clean(self) -> None:
         self.__remove_stop_words()
-        print(type(self.content))
-        print(self.content)
+        # print(self.content)
         self.__stemming()
-        print(self.content)
-        self.__lemmatization()
-        print(self.content)
+        # print(self.content)
+        # self.__lemmatization()
+        # print(self.content)
     
 
 

@@ -8,12 +8,20 @@ def main():
     crawler = crawlerp.Crawler()
     indexer = indexerp.Indexer()
     cleaner = crawlerp.HtmlCleaner()
-
+    url_queue = crawler.get_queue()
     webpage.set_page_data(initial_url)
-    # crawler.crawl(indexer, webpage)
     cleaner.set_data(re.split('\||\s', webpage.get_content()))
     cleaner.run_clean()
-    
+    webpage.set_content(cleaner.get_cleaned())
+    crawler.crawl(indexer, webpage)
+
+    while url_queue:
+        webpage.set_page_data(url_queue.pop())
+        cleaner.set_data(re.split('\||\s', webpage.get_content()))
+        cleaner.run_clean()
+        webpage.set_content(cleaner.get_cleaned())
+        crawler.crawl(indexer, webpage)
+        url_queue.print()
 
 if __name__ == "__main__":
     main()
