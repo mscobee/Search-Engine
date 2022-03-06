@@ -1,34 +1,52 @@
-from nltk.stem import PorterStemmer
+from nltk.stem import PorterStemmer, WordNetLemmatizer
 from urllib.request import urlopen
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+
 import re
 class HtmlCleaner:
 
 
     def __init__(self) -> None:
-        self.ps = PorterStemmer()
-        self.stop_words = set(stopwords.words('english'))
-
-        
-    def remove_stop_words(self):
-        new_text = ''
-        for w in self.content:
-            if w not in self.stop_words:
-                new_text += w + ' '
-            self.set_data(new_text) # this is shit i think? find more efficient way to do the data transfers
-    def stemming(self):
-        new_text = ''
-        for word in self.content:
-            new_text += (self.ps.stem(word) + ' ')
-        self.content = new_text
+        self.__ps = PorterStemmer()
+        self.__lemm = WordNetLemmatizer()
+        self.__stop_words = set(stopwords.words('english'))
 
     def set_data(self, content):
+        """accepts a list of strings"""
         # split the string content into a list on all whitespace and '|'
-        self.content = re.split('\||\s', content)
-    def run_clean(self):
-        self.content = self.__stemming()
-        return self.content
+        # self.content = re.split('\||\s', content)
+        self.content = content
+
+
+    def __remove_stop_words(self):
+        new_text = ''
+        for w in self.content:
+            if w not in self.__stop_words:
+                new_text += w + ' '
+            self.set_data(re.split('\||\s', new_text))
+            
+    def __stemming(self):
+        new_text = ''
+        for word in self.content:
+            new_text += (self.__ps.stem(word) + ' ')
+        self.set_data(re.split('\||\s', new_text))
+
+    def __lemmatization(self):
+        new_text = ''
+        for word in self.content:
+            new_text += self.__lemm.lemmatize(word) + ' '
+        self.content = new_text
+
+
+    def run_clean(self) -> str:
+        self.__remove_stop_words()
+        print(type(self.content))
+        print(self.content)
+        self.__stemming()
+        print(self.content)
+        self.__lemmatization()
+        print(self.content)
     
 
 

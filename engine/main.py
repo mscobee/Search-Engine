@@ -11,17 +11,8 @@ def main():
 
     webpage.set_page_data(initial_url)
     # crawler.crawl(indexer, webpage)
-    cleaner.set_data(webpage.get_content())
-    print('Before')
-    print(cleaner.content)
-
-    print('After stopword removal')
-    cleaner.remove_stop_words()
-    print(cleaner.content)
-
-    print('after stemming')
-    cleaner.stemming()
-    print(cleaner.content)
+    cleaner.set_data(re.split('\||\s', webpage.get_content()))
+    cleaner.run_clean()
     
 
 if __name__ == "__main__":
