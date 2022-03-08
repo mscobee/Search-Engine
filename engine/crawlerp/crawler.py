@@ -1,9 +1,6 @@
 from tokenize import String
 from urllib.parse import urlparse
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
 from .my_queue import My_Queue
-from nltk.stem import *
 class Crawler:
     """Crawler is an object that can be used to Crawl web pages and store their content using BeautifulSoup4"""
 
