@@ -7,11 +7,29 @@ services:
       - 3306:3306
     expose:
       - 3306
-    volumes:
-    # todo
     environment:
       - MYSQL_ROOT_PASSWORD = sqlpw
       - MYSQL_PASSWORD = sqlpw
       - MYSQL_USER=MYSQL_ROOT_PASSWORD
       - MYSQL_DATABASE = search_engine
-  
+
+  python:
+    image: python:latest
+    ports:
+      - 3305:3305
+    expose:
+      - 3305
+
+    volumes:
+     - ./engine/:/srv/engine
+
+
+    depends_on:
+      - db
+
+  node:
+    image: node:latest
+    ports:
+      - 3304:3304
+    expose:
+      - 3304

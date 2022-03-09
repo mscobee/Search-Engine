@@ -1,7 +1,8 @@
-FROM ubuntu:latest
+# FROM ubuntu:latest
 FROM python:latest
-WORKDIR /src
-COPY requirements.txt requirements.txt
-RUN apt-get update && apt-get clean
+RUN mkdir -p /home/app
+WORKDIR /home/app
+COPY . /home/app
 RUN pip install -r requirements.txt
-CMD ["python", "./main.py"]
+RUN python -m nltk.downloader stopwords
+CMD ["python", "engine/main.py"]

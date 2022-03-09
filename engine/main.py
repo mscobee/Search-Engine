@@ -13,7 +13,9 @@ def main():
     cleaner.set_data(re.split('\||\s', webpage.get_content()))
     cleaner.run_clean()
     webpage.set_content(cleaner.get_cleaned())
-    crawler.crawl(indexer, webpage)
+    # crawler.crawl(indexer, webpage)
+    print(webpage.get_title())
+    print(webpage.get_content())
 
     # while url_queue:
     #     webpage.set_page_data(url_queue.pop())
